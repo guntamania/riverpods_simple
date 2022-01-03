@@ -11,7 +11,7 @@ class AppDio with DioMixin implements Dio {
 
   AppDio._([BaseOptions? options]) {
     options = BaseOptions(
-      baseUrl: "https://qiita.com/api/",
+      baseUrl: "https://picsum.photos/v2/",
       contentType: 'application/json',
       connectTimeout: 30000,
       sendTimeout: 30000,

@@ -2,27 +2,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpods_simple/data/model/item.dart';
+import 'package:riverpods_simple/data/model/info.dart';
 import 'package:riverpods_simple/data/model/result.dart';
-import 'package:riverpods_simple/data/repository/item_api_repository.dart';
-import 'package:riverpods_simple/data/repository/item_api_repository_impl.dart';
+import 'package:riverpods_simple/data/repository/info_api_repository.dart';
+import 'package:riverpods_simple/data/repository/info_api_repository_impl.dart';
 
-final itemViewModelProvider =
-    ChangeNotifierProvider((ref) => ItemViewModel(ref.read));
+final infoViewModelProvider =
+    ChangeNotifierProvider((ref) => InfoViewModel(ref.read));
 
-class ItemViewModel extends ChangeNotifier {
-  ItemViewModel(this._reader);
+class InfoViewModel extends ChangeNotifier {
+  InfoViewModel(this._reader);
 
   final Reader _reader;
 
-  late final ItemApiRepository _itemApiRepository = _reader(itemApiRepositoryProvider);
+  late final InfoApiRepository _itemApiRepository = _reader(infoApiRepositoryProvider);
 
-  Result<List<Item>>? _items;
+  Result<List<Info>>? _items;
 
-  Result<List<Item>>? get items => _items;
+  Result<List<Info>>? get items => _items;
 
   // これをViewからいじるのをやめたい..
-  List<Item> itemList = [];
+  List<Info> itemList = [];
 
   Future<void> fetchItems() {
     return _itemApiRepository
