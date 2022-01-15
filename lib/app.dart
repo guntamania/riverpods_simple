@@ -9,6 +9,6 @@ class App extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(theme: ThemeData.light(), home: InfoList());
+    return MaterialApp(theme: ThemeData.light(), home: const InfoList());
   }
 }

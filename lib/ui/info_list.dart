@@ -15,41 +15,37 @@ class InfoList extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final infosViewModel = ref.read(infoViewModelProvider);
     final info =
-        ref.watch(infoViewModelProvider.select((value) => value.items));
+        ref.watch(infoViewModelProvider.select((value) => value.asyncInfo));
 
     useFuture(
       useMemoized(() {
         return infosViewModel.fetchItems();
-      }, [info.toString()]),
+      }),
     );
 
     return Stack(
       children: [
         info == null
             ? const Center(child: Text("No result"))
-            : info.when(success: (data) {
-                log("new data coming!");
-                log(data.first.author.toString());
+            : info.when(data: (data) {
+                log("new data coming! length(after): ${data.length}");
                 if (data.isEmpty) {
                   return const Center(child: Text("No result"));
                 }
-
-                log("length(before): ${infosViewModel.itemList.length}");
-                infosViewModel.itemList.addAll(data);
-
-                log("length(after): ${infosViewModel.itemList.length}");
                 return ListView.builder(
-                    itemCount: infosViewModel.itemList.length + 1,
+                    itemCount: data.length + 1,
                     itemBuilder: (_, index) {
-                      if(index == infosViewModel.itemList.length) {
+                      if(index == data.length) {
                           final page = (index / 20).ceil() + 1;
-                          log("page: $page");
                           infosViewModel.loadMore(page: page);
                           return const Center(child: Text("Loading"));
                       }
-                      return ArticleItem(info: infosViewModel.itemList[index], index: index);
+                      return ArticleItem(info: data[index], index: index);
                     });
-              }, failure: (AppError error) {
+              }, loading:() {
+                return const Center(child: Text("Loading"));
+              }
+              , error: (_, __) {
                 return const Center(child: Text("No result"));
               }),
         const SizedBox()

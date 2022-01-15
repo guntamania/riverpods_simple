@@ -1,9 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpods_simple/data/model/info.dart';
-import 'package:riverpods_simple/data/model/result.dart';
 import 'package:riverpods_simple/data/repository/info_api_repository.dart';
 import 'package:riverpods_simple/data/repository/info_api_repository_impl.dart';
 
@@ -17,28 +15,32 @@ class InfoViewModel extends ChangeNotifier {
 
   late final InfoApiRepository _itemApiRepository = _reader(infoApiRepositoryProvider);
 
-  Result<List<Info>>? _items;
+  AsyncValue<List<Info>>? _asyncInfo;
+  AsyncValue<List<Info>>? get asyncInfo => _asyncInfo;
 
-  Result<List<Info>>? get items => _items;
+  List<Info> _itemList = [];
 
-  // これをViewからいじるのをやめたい..
-  List<Info> itemList = [];
-
-  Future<void> fetchItems() {
-    return _itemApiRepository
-        .getItems(page: 1)
-        .then((value) => {
-          _items = value
-        })
-        .whenComplete(notifyListeners);
+  Future<void> fetchItems() async {
+    try {
+      _itemList = await _itemApiRepository
+          .getInfos(page: 1);
+      _asyncInfo = AsyncValue.data(_itemList);
+    } on Exception catch (e) {
+      _asyncInfo =  AsyncValue.error(e);
+    } finally {
+      notifyListeners();
+    }
   }
 
-  Future<void> loadMore({required int page}) {
-    return _itemApiRepository
-        .getItems(page: page)
-        .then((value) {
-          _items = value;
-        })
-        .whenComplete(notifyListeners);
+  Future<void> loadMore({required int page}) async {
+    try {
+      _itemList += await _itemApiRepository
+          .getInfos(page: page);
+      _asyncInfo = AsyncValue.data(_itemList);
+    } on Exception catch (e) {
+      _asyncInfo =  AsyncValue.error(e);
+    } finally {
+      notifyListeners();
+    }
   }
 }
