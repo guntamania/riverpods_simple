@@ -33,7 +33,8 @@ class ArticleItem extends HookConsumerWidget {
         child: Column(
           children:<Widget>[
             Text("$index " + info.author),
-            Text(info.url)
+            Text(info.url),
+            Image.network(info.download_url, height: 50,),
           ]
         )
       )

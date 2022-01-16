@@ -9,6 +9,7 @@ abstract class Info with _$Info {
     required String id,
     required String author,
     required String url,
+    required String download_url,
   }) = _Info;
 
   factory Info.fromJson(Map<String, dynamic> json) => _$InfoFromJson(json);

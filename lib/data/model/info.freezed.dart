@@ -22,11 +22,15 @@ class _$InfoTearOff {
   const _$InfoTearOff();
 
   _Info call(
-      {required String id, required String author, required String url}) {
+      {required String id,
+      required String author,
+      required String url,
+      required String download_url}) {
     return _Info(
       id: id,
       author: author,
       url: url,
+      download_url: download_url,
     );
   }
 
@@ -43,6 +47,7 @@ mixin _$Info {
   String get id => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
+  String get download_url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +58,7 @@ mixin _$Info {
 abstract class $InfoCopyWith<$Res> {
   factory $InfoCopyWith(Info value, $Res Function(Info) then) =
       _$InfoCopyWithImpl<$Res>;
-  $Res call({String id, String author, String url});
+  $Res call({String id, String author, String url, String download_url});
 }
 
 /// @nodoc
@@ -69,6 +74,7 @@ class _$InfoCopyWithImpl<$Res> implements $InfoCopyWith<$Res> {
     Object? id = freezed,
     Object? author = freezed,
     Object? url = freezed,
+    Object? download_url = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -83,6 +89,10 @@ class _$InfoCopyWithImpl<$Res> implements $InfoCopyWith<$Res> {
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
+      download_url: download_url == freezed
+          ? _value.download_url
+          : download_url // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -92,7 +102,7 @@ abstract class _$InfoCopyWith<$Res> implements $InfoCopyWith<$Res> {
   factory _$InfoCopyWith(_Info value, $Res Function(_Info) then) =
       __$InfoCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String author, String url});
+  $Res call({String id, String author, String url, String download_url});
 }
 
 /// @nodoc
@@ -109,6 +119,7 @@ class __$InfoCopyWithImpl<$Res> extends _$InfoCopyWithImpl<$Res>
     Object? id = freezed,
     Object? author = freezed,
     Object? url = freezed,
+    Object? download_url = freezed,
   }) {
     return _then(_Info(
       id: id == freezed
@@ -123,6 +134,10 @@ class __$InfoCopyWithImpl<$Res> extends _$InfoCopyWithImpl<$Res>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
+      download_url: download_url == freezed
+          ? _value.download_url
+          : download_url // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -130,7 +145,11 @@ class __$InfoCopyWithImpl<$Res> extends _$InfoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Info implements _Info {
-  _$_Info({required this.id, required this.author, required this.url});
+  _$_Info(
+      {required this.id,
+      required this.author,
+      required this.url,
+      required this.download_url});
 
   factory _$_Info.fromJson(Map<String, dynamic> json) => _$$_InfoFromJson(json);
 
@@ -140,10 +159,12 @@ class _$_Info implements _Info {
   final String author;
   @override
   final String url;
+  @override
+  final String download_url;
 
   @override
   String toString() {
-    return 'Info(id: $id, author: $author, url: $url)';
+    return 'Info(id: $id, author: $author, url: $url, download_url: $download_url)';
   }
 
   @override
@@ -153,11 +174,13 @@ class _$_Info implements _Info {
             other is _Info &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.author, author) || other.author == author) &&
-            (identical(other.url, url) || other.url == url));
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.download_url, download_url) ||
+                other.download_url == download_url));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, author, url);
+  int get hashCode => Object.hash(runtimeType, id, author, url, download_url);
 
   @JsonKey(ignore: true)
   @override
@@ -174,7 +197,8 @@ abstract class _Info implements Info {
   factory _Info(
       {required String id,
       required String author,
-      required String url}) = _$_Info;
+      required String url,
+      required String download_url}) = _$_Info;
 
   factory _Info.fromJson(Map<String, dynamic> json) = _$_Info.fromJson;
 
@@ -184,6 +208,8 @@ abstract class _Info implements Info {
   String get author;
   @override
   String get url;
+  @override
+  String get download_url;
   @override
   @JsonKey(ignore: true)
   _$InfoCopyWith<_Info> get copyWith => throw _privateConstructorUsedError;
