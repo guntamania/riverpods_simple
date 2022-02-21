@@ -33,6 +33,9 @@ dependencies:
   json_serializable: ^5.0.2
   freezed_annotation: ^0.15.0
 
+  # For Navigation
+  auto_route: ^3.0.4
+
   # icons
   cupertino_icons: ^1.0.2
 
@@ -52,6 +55,9 @@ dev_dependencies:
 
   # For Model
   freezed: ^0.15.0
+
+  # For Navigation
+  auto_route_generator: ^3.0.1
 
   build_runner: ^2.1.5
 

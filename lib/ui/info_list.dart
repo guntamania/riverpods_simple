@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpods_simple/data/app_error.dart';
 import 'package:riverpods_simple/ui/infos_view_model.dart';
 
 import 'article_item.dart';

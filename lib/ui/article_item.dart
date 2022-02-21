@@ -1,13 +1,14 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpods_simple/data/model/info.dart';
+import 'package:riverpods_simple/hook/use_router.dart';
+import 'package:riverpods_simple/route/app_route.gr.dart';
 
 class ArticleItem extends HookConsumerWidget {
   const ArticleItem({
-      Key? key,
+    Key? key,
     required this.info,
     required this.index
   });
@@ -22,22 +23,25 @@ class ArticleItem extends HookConsumerWidget {
     bottomRight: Radius.circular(0),
   );
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final router = useRouter();
     return Card(
       margin: const EdgeInsets.all(12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       elevation: 2,
-      child: Card(
-        child: Column(
-          children:<Widget>[
-            Text("$index " + info.author),
-            Text(info.url),
-            Image.network(info.download_url, height: 50,),
-          ]
-        )
-      )
+      child: InkWell(
+        child: Card(
+            child: Column(
+                children: <Widget>[
+                  Text("$index " + info.author),
+                  Text(info.url),
+                  Image.network(info.download_url, height: 50,),
+                ]
+            )
+        ),
+        onTap: () => router.push(InfoDetailRoute(info: info)),
+      ),
     );
   }
 }
