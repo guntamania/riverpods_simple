@@ -7,11 +7,7 @@ import 'package:riverpods_simple/hook/use_router.dart';
 import 'package:riverpods_simple/route/app_route.gr.dart';
 
 class ArticleItem extends HookConsumerWidget {
-  const ArticleItem({
-    Key? key,
-    required this.info,
-    required this.index
-  });
+  const ArticleItem({Key? key, required this.info, required this.index});
 
   final Info info;
   final int index;
@@ -31,15 +27,19 @@ class ArticleItem extends HookConsumerWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       elevation: 2,
       child: InkWell(
-        child: Card(
-            child: Column(
-                children: <Widget>[
-                  Text("$index " + info.author),
-                  Text(info.url),
-                  Image.network(info.download_url, height: 50,),
-                ]
-            )
-        ),
+        child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(children: <Widget>[
+              Text("$index " + info.author),
+              Text(info.url),
+              Container(
+                margin: const EdgeInsets.all(4),
+                child: Image.network(
+                  info.download_url,
+                  height: 50,
+                ),
+              ),
+            ])),
         onTap: () => router.push(InfoDetailRoute(info: info)),
       ),
     );

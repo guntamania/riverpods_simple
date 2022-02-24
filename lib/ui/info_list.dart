@@ -27,7 +27,6 @@ class InfoList extends HookConsumerWidget {
         info == null
             ? const Center(child: Text("No result"))
             : info.when(data: (data) {
-                log("new data coming! length(after): ${data.length}");
                 if (data.isEmpty) {
                   return const Center(child: Text("No result"));
                 }
